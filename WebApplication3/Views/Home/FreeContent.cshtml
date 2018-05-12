@@ -9,21 +9,21 @@
 
     var selectedpost = Model.posts.Where(x => x.index == ViewBag.postid).FirstOrDefault();
 
-    var field = "0 RELATED MATERIALS";
+    var field = "0 ATTACHED MATERIALS";
     var hasvideo = true;
 
     if (selectedpost != null)
     {
         if (selectedpost.materials.Count > 0)
         {
-            field = selectedpost.materials.Count + " POST RELATED MATERIALS:";
+            field = selectedpost.materials.Count + " ATTACHED MATERIAL(S):";
         }
 
         if (selectedpost.video_url == null || selectedpost.video_url == "")
         {
             hasvideo = false;
         }
-
+        
     }
 }
 
@@ -79,7 +79,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="datebar">
-                            <span class="glyphicon glyphicon-calendar"></span>
+                            <span class="glyphicon glyphicon-calendar" style="float: left;"></span>
                             <span style="margin-left: 10px;">@selectedpost.datum</span>
                         </div>
                         <div class="datebar">
@@ -95,26 +95,7 @@
     }
 }
 }
-     <!-- CHECK IF POST LINK WAS SET if so, show the post aswell as the material-->
-@section pinnedpost{
 
- @*
-
-    @if (ViewBag.postid != 0 && hasvideo == true) //0 is default
-        {
-            <div style='padding-left: 0;'>
-                <div class='thumbnail'>
-                    <div class='gif-post'><div class='container2 pinned-video'><iframe src='@selectedpost.video_url' frameborder='0' autoplay='0' allowfullscreen class='video'></iframe></div></div>
-                    <div class='caption'>
-                        <h3 class="scribblefont">@selectedpost.titel</h3><p style="text-align:center">@selectedpost.text</p>
-
-                        @*<a href="#" class="btn btn-primary" role="button">cate.name</a>
-                    </div>
-                </div>
-            </div>
-    }*@
-
-}
 
 <div class="row">
 
@@ -160,11 +141,9 @@
                 </div>
             }
        
-        <div class="col-md-12" style="padding:0;box-shadow: 0px 1px 6px 0px #00000040;">
-                  <div class="finmenuheader menu-title" style="color: black;"><h4 class="media-heading" style="border-radius:initial !important;text-transform:uppercase">Materials</h4></div>
-            <fieldset class="fieldset">
-                <legend>@field</legend>
-
+        <div class="col-md-12" style="padding:0;padding-bottom: 20px;box-shadow: 0px 1px 6px 0px #00000040;">
+                  <div class="finmenuheader menu-title" style="color: black;"><h4 class="media-heading" style="border-radius:initial !important;text-transform:uppercase">@field</h4></div>
+            
 
                 <!-- linked single material-->
                 @if (selectedpost != null)
@@ -191,59 +170,9 @@
                 </span>
             </div>
                 }
-                else
-                {
-
-            <div class="col-md-12">
-                <div class="alert alert-success" role="alert"><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</div>
-                <span href="#" class="thumbnail hoverclickzor">
-                    <div class="innerpictext">
-                        @selectedmaterial.description<br /> By Christopher Jubell 2017 under <a class="alink" href="http://creativecommons.org/licenses/by/4.0/">(CC BY 4.0)</a>  <br /><br />
-
-                        @if (selectedmaterial.type == 3) // the material type is a blender file
-                                {
-                                <a href="@Url.Action("GetBlenderFile","Home",new { FileUrl = selectedmaterial.BlenderFile })"><button type="button" class="btn btn-success">Download 3D Model</button></a>
-                                }
-                                else
-                                {
-                                <a href="@selectedmaterial.imageurl" download="material"><button type="button" class="btn btn-success">Download</button></a>
-                                }
-
-
-
-                    </div>
-                    <img src="@selectedmaterial.imageurl" alt="...">
-                </span>
-            </div>
-
-                }
-            }
-            else
-            {
-
-            <div class="col-md-12">
-                <div class="alert alert-success" role="alert"><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</div>
-                <span href="#" class="thumbnail hoverclickzor">
-                    <div class="innerpictext">
-                        @selectedmaterial.description<br /> By Christopher Jubell 2017 under <a class="alink" href="http://creativecommons.org/licenses/by/4.0/">(CC BY 4.0)</a>  <br /><br />
-
-                        @if (selectedmaterial.type == 3) // the material type is a blender file
-                {
-                            <a href="@Url.Action("GetBlenderFile","Home",new { FileUrl = selectedmaterial.BlenderFile })"><button type="button" class="btn btn-success">Download 3D Model</button></a>
-                            }
-                            else
-                            {
-                            <a href="@selectedmaterial.imageurl" download="material"><button type="button" class="btn btn-success">Download</button></a>
-                            }
-
-
-
-                    </div>
-                    <img src="@selectedmaterial.imageurl" alt="...">
-                </span>
-            </div>
 
             }
+
 
                 <!-- all materials-->
 
@@ -296,38 +225,39 @@
 
 
                 </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="col-md-12 alert alert-success">Limited to 4 results, click <a href="@Url.Action("Materials","Home")">here</a> to see all free materials</div>
+                            foreach (var material in Model.materials)
+                            {
+                            <div class="col-md-3">
+                            @if (selectedpost != null) // video is set
+                            {
+                                <a href="@Url.Action("FreeContent", "Home", new { materialid = material.index, postid = selectedpost.index })" class="thumbnail">
+                                    <img src="@material.imageurl" alt="...">
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("FreeContent", "Home", new { materialid = material.index })" class="thumbnail">
+                                    <img src="@material.imageurl" alt="...">
+                                </a>
+                            }
+                            </div>
+                            }
                         }
                     }
                     else
                     {
+                        <div class="col-md-12 alert alert-success">Limited to 4 results, click <a href="@Url.Action("Materials","Home")">here</a> to see all free materials</div>
                         foreach (var material in Model.materials)
                         {
                 <div class="col-md-3">
                     @if (selectedpost != null) // video is set
-                        {
-                                <a href="@Url.Action("FreeContent", "Home", new { materialid = material.index, postid = selectedpost.index })" class="thumbnail">
-                                    <img src="@material.imageurl" alt="...">
-                                </a>
-                                }
-                                else
-                                {
-                                <a href="@Url.Action("FreeContent", "Home", new { materialid = material.index })" class="thumbnail">
-                                    <img src="@material.imageurl" alt="...">
-                                </a>
-                                }
-
-
-                </div>
-                        }
-                    }
-                }
-                else
-                {
-                    foreach (var material in Model.materials)
-                    {
-                <div class="col-md-3">
-                    @if (selectedpost != null) // video is set
                             {
+
                             <a href="@Url.Action("FreeContent", "Home", new { materialid = material.index, postid = selectedpost.index })" class="thumbnail">
                                 <img src="@material.imageurl" alt="...">
                             </a>
@@ -346,7 +276,6 @@
 
 
                 </div>
-            </fieldset>
         </div>
     </div>
 

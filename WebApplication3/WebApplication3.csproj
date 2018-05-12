@@ -212,6 +212,7 @@
     <Content Include="Views\Home\_menu.cshtml" />
     <Content Include="Views\Home\FreeContent.cshtml" />
     <Content Include="Views\Home\_menu2.cshtml" />
+    <Content Include="Views\Home\Materials.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
