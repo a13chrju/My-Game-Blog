@@ -98,9 +98,55 @@ namespace WebApplication3.Controllers
 
             return View(blogg);
         }
-        public ActionResult Materials()
+
+        [Route("Home/Materials/{id?}")]
+        public ActionResult Materials(int? id)
         {
-            return View();
+            DownloadMaterials model = new DownloadMaterials();
+
+
+            MySqlConnection con4 = new MySqlConnection();
+            con4.ConnectionString = ConfigurationManager.ConnectionStrings["test"].ToString();
+            con4.Open();
+            MySqlCommand fetchdata3 = new MySqlCommand("SELECT * from materials", con4);
+            MySqlDataReader r3 = fetchdata3.ExecuteReader();
+            List<material> allmaterials = new List<material>();
+
+            while (r3.Read())
+            {
+                material material = new material();
+                material.index = Convert.ToInt32(r3["index"]);
+                material.description = r3["description"].ToString();
+                material.BlenderFile = r3["BlenderFile"].ToString();
+                material.imageurl = r3["imageurl"].ToString();
+                material.type = Convert.ToInt32(r3["type"]);
+                allmaterials.Add(material);
+            }
+            model.materials = allmaterials;
+            var selectedmaterial = new material();
+
+            if (id != null)
+            {
+                MySqlConnection con5 = new MySqlConnection();
+                con5.ConnectionString = ConfigurationManager.ConnectionStrings["test"].ToString();
+                con5.Open();
+                MySqlCommand fetchdata5 = new MySqlCommand("SELECT * from materials where index =" + Convert.ToInt32(id), con5);
+                MySqlDataReader r5 = fetchdata5.ExecuteReader();
+
+                while (r5.Read())
+                {
+                    material material = new material();
+                    material.index = Convert.ToInt32(r3["index"]);
+                    material.description = r3["description"].ToString();
+                    material.BlenderFile = r3["BlenderFile"].ToString();
+                    material.imageurl = r3["imageurl"].ToString();
+                    material.type = Convert.ToInt32(r3["type"]);
+                    selectedmaterial = material;
+                }
+                model.selectedmaterial = selectedmaterial;
+            }
+
+            return View(model);
         }
 
         public ActionResult FreeContent(int materialid = 1, int postid = 0)

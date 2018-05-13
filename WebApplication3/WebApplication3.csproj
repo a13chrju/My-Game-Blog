@@ -161,6 +161,7 @@
     <Compile Include="Models\blogg.cs" />
     <Compile Include="Models\bloggs.cs" />
     <Compile Include="Models\category.cs" />
+    <Compile Include="Models\DownloadMaterials.cs" />
     <Compile Include="Models\material.cs" />
     <Compile Include="Models\matpost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
