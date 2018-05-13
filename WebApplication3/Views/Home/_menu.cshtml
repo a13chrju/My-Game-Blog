@@ -94,7 +94,9 @@
                     }
                 </div>
 
-                <div class="col-xs-12 col-sm-6 col-md-12 thumbnailpic" @if (item.materials.Count > 0) { <text> style="padding: 0; height: 180px;align-items: center;background-image: url(@item.materials.First().imageurl); background-size: cover;}" </text> } else { <text> style="padding: 0; height: 180px;align-items: center; background-size: cover;background:Black" </text> }>
+                <div class="col-xs-12 col-sm-6 col-md-12 thumbnailpic" @if (item.thumbnail != null && item.thumbnail != "") {<text> style="padding: 0; height: 180px;align-items: center;background-image: url(@item.thumbnail); background-size: cover;}" </text> } else if (item.materials.Count > 0) {
+                    <text> style="padding: 0; height: 180px;align-items: center;background-image: url(@item.materials.First().imageurl); background-size: cover;}" </text> }
+                else { <text> style="padding: 0; height: 180px;align-items: center; background-size: cover;background:Black" </text> }>
                     <div class="datum-placement-black"></div>
                     <div class="datum-placement">@item.datum</div>
                 </div>

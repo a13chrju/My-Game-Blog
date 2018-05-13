@@ -37,6 +37,7 @@ namespace WebApplication3.Controllers
                 blogg post = new blogg();
                 post.titel = r2["titel"].ToString();
                 post.text = r2["text"].ToString();
+                post.thumbnail = r2["thumbnail"].ToString();
                 post.episode = Convert.ToInt32(r2["episode"]);
                 post.category = Convert.ToInt32(r2["category"]); ;
                 post.index = Convert.ToInt32(r2["id"]);
@@ -207,6 +208,7 @@ namespace WebApplication3.Controllers
                 post.datum = r2["datum"].ToString();
                 post.text = r2["text"].ToString();
                 post.episode = Convert.ToInt32(r2["episode"]);
+                post.thumbnail = r2["thumbnail"].ToString();
                 post.category = Convert.ToInt32(r2["category"]);
                 post.index = Convert.ToInt32(r2["id"]);
                 post.video_url = r2["video_url"].ToString();
