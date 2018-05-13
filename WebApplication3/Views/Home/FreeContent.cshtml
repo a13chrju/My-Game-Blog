@@ -206,20 +206,10 @@
                                 foreach (var materialCON in selectedpost.materials)
                                 {
                                     <div class="col-xs-3 col-sm-3 col-md-3">
-                                        @if (selectedpost != null) // video is set
-                                        {
-                                            <a href="@Url.Action("FreeContent", "Home", new { materialid = materialCON.index, postid = selectedpost.index })" class="thumbnail">
+
+                                            <a href="@Url.Action("materials", "Home", new { id = materialCON.index })" class="thumbnail">
                                                 <img src="@materialCON.imageurl" alt="...">
                                             </a>
-                                        }
-                                        else
-                                        {
-                                            <a href="@Url.Action("FreeContent", "Home", new { materialid = materialCON.index })" class="thumbnail">
-                                                <img src="@materialCON.imageurl" alt="...">
-                                            </a>
-                                        }
-
-
                                     </div>
                                 }
                             }
@@ -229,18 +219,11 @@
                                 foreach (var material in Model.materials)
                                 {
                                     <div class="col-xs-3 col-sm-3 col-md-3">
-                                        @if (selectedpost != null) // video is set
-                                        {
-                                            <a href="@Url.Action("FreeContent", "Home", new { materialid = material.index, postid = selectedpost.index })" class="thumbnail">
+
+                                            <a href="@Url.Action("materials", "Home", new { id = material.index })" class="thumbnail">
                                                 <img src="@material.imageurl" alt="...">
                                             </a>
-                                        }
-                                        else
-                                        {
-                                            <a href="@Url.Action("FreeContent", "Home", new { materialid = material.index })" class="thumbnail">
-                                                <img src="@material.imageurl" alt="...">
-                                            </a>
-                                        }
+                                        
                                     </div>
                                 }
                             }
@@ -251,19 +234,11 @@
                             foreach (var material in Model.materials)
                             {
                                 <div class="col-xs-3 col-sm-3 col-md-3">
-                                    @if (selectedpost != null) // video is set
-                                    {
-
-                                        <a href="@Url.Action("FreeContent", "Home", new { materialid = material.index, postid = selectedpost.index })" class="thumbnail">
+                                   
+                                        <a href="@Url.Action("materials", "Home", new { id = material.index })" class="thumbnail">
                                             <img src="@material.imageurl" alt="...">
                                         </a>
-                                    }
-                                    else
-                                    {
-                                        <a href="@Url.Action("FreeContent", "Home", new { materialid = material.index })" class="thumbnail">
-                                            <img src="@material.imageurl" alt="...">
-                                        </a>
-                                    }
+                                    
 
 
                                 </div>

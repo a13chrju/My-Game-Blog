@@ -123,6 +123,9 @@ namespace WebApplication3.Controllers
                 allmaterials.Add(material);
             }
             model.materials = allmaterials;
+            con4.Close();
+
+
             var selectedmaterial = new material();
 
             if (id != null)
@@ -130,20 +133,21 @@ namespace WebApplication3.Controllers
                 MySqlConnection con5 = new MySqlConnection();
                 con5.ConnectionString = ConfigurationManager.ConnectionStrings["test"].ToString();
                 con5.Open();
-                MySqlCommand fetchdata5 = new MySqlCommand("SELECT * from materials where index =" + Convert.ToInt32(id), con5);
+                MySqlCommand fetchdata5 = new MySqlCommand("SELECT * from materials where materials.index =" + id, con5);
                 MySqlDataReader r5 = fetchdata5.ExecuteReader();
 
                 while (r5.Read())
                 {
                     material material = new material();
-                    material.index = Convert.ToInt32(r3["index"]);
-                    material.description = r3["description"].ToString();
-                    material.BlenderFile = r3["BlenderFile"].ToString();
-                    material.imageurl = r3["imageurl"].ToString();
-                    material.type = Convert.ToInt32(r3["type"]);
+                    material.index = Convert.ToInt32(r5["index"]);
+                    material.description = r5["description"].ToString();
+                    material.BlenderFile = r5["BlenderFile"].ToString();
+                    material.imageurl = r5["imageurl"].ToString();
+                    material.type = Convert.ToInt32(r5["type"]);
                     selectedmaterial = material;
                 }
                 model.selectedmaterial = selectedmaterial;
+                con5.Close();
             }
 
             return View(model);

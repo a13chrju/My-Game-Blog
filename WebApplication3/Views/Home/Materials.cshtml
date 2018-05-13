@@ -22,7 +22,7 @@
                     console.log(data);
                     var output = "";
                     for (var i = 0; i < data.length; i++){
-                        output += "<div class='col-md-3'><a class='thumbnail' href='/Home/FreeContent?materialid="+data[i].index+"'><img src='" + data[i].imageurl + "' alt='...'></a></div>";
+                        output += "<div class='col-md-3'><a class='thumbnail' href='/Home/materials?id="+data[i].index+"'><img src='" + data[i].imageurl + "' alt='...'></a></div>";
                     }
                     if (data.length <= 0){
                         output += "<div class='col-md-12'>Sorry Pal, no Materials of this Type exist right now.</div>"
@@ -46,7 +46,7 @@
     });
 
 </script>
-<h2>Materials</h2>
+
 
 @if (Model.selectedmaterial != null)
 {
@@ -74,8 +74,8 @@
 }
 
 
-
-<div class="col-md-6">
+<div class="col-xs-12 col-sm-12 col-md-12 material-infobar">
+    <h2>Materials</h2>
     <div class="select-material">Select Material Type</div><div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             Dropdown
@@ -91,17 +91,18 @@
     </div>
 </div><!-- /.col-lg-6 -->
 
-<div class="col-md-12"</div>
-<div class="row" id="search-materials">
-    @foreach (var material in Model.materials)
-    {
-        <div class="col-xs-6 col-sm-4 col-md-3">
+<div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="row" id="search-materials">
+        @foreach (var material in Model.materials)
+        {
+            <div class="col-xs-6 col-sm-4 col-md-3">
 
-            <a href="@Url.Action("materials", "Home", new { id = material.index })" class="thumbnail">
-                <img src="@material.imageurl" alt="...">
-            </a>
+                <a href="@Url.Action("materials", "Home", new { id = material.index })" class="thumbnail">
+                    <img src="@material.imageurl" alt="...">
+                </a>
 
-        </div>
-    }
+            </div>
+        }
 
+    </div>
 </div>
