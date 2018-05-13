@@ -1,0 +1,108 @@
+﻿
+@model WebApplication3.Models.DownloadMaterials
+@{
+    ViewBag.Title = "Materials";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+
+
+    $(document).ready(function () {
+        $('.dropdown-toggle').dropdown();
+
+
+        $(".selecttype").on("click", function () {
+            var hiddenval = $(this).find(".hiddeninp").val();
+
+
+            $.ajax({
+                url: '@Url.Action("getmatcategory", "Home")',
+                data: { id: hiddenval },
+                success: function (data) {
+                    console.log(data);
+                    var output = "";
+                    for (var i = 0; i < data.length; i++){
+                        output += "<div class='col-md-3'><a class='thumbnail' href='/Home/materials?id="+data[i].index+"'><img src='" + data[i].imageurl + "' alt='...'></a></div>";
+                    }
+                    if (data.length <= 0){
+                        output += "<div class='col-md-12'>Sorry Pal, no Materials of this Type exist right now.</div>"
+                            }
+
+
+                  $("#search-materials").html(output);
+
+
+                },
+              error:function (xhr, ajaxOptions, thrownError){
+                    //some errror, some show err msg to user and log the error
+                    alert(xhr.responseText);
+
+                }
+            });
+        });
+
+
+
+    });
+
+</script>
+
+
+@if (Model.selectedmaterial != null)
+{
+    <div class="col-md-12">
+        <div class="alert alert-success" role="alert"><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</div>
+        <div class="alert alert-warning" role="alert">Click here to copy the attribution link for this model and paste it on your website.</div>
+        <span href="#" class="thumbnail hoverclickzor">
+            <div class="innerpictext">
+                @Model.selectedmaterial.description<br /> By Christopher Jubell 2017 under <a class="alink" href="http://creativecommons.org/licenses/by/4.0/">(CC BY 4.0)</a>  <br /><br />
+
+                @if (Model.selectedmaterial.type == 3) // the material type is a blender file
+                {
+                    <a href="@Url.Action("GetBlenderFile","Home",new { FileUrl = Model.selectedmaterial.BlenderFile })"><button type="button" class="btn btn-success">Download 3D Model</button></a>
+                }
+                else
+                {
+                    <a href="@Model.selectedmaterial.imageurl" download="material"><button type="button" class="btn btn-success">Download</button></a>
+                }
+
+            </div>
+            <img src="@Model.selectedmaterial.imageurl" alt="...">
+        </span>
+    </div>
+
+}
+
+
+<div class="col-xs-12 col-sm-12 col-md-12 material-infobar">
+    <h2>Materials</h2>
+    <div class="select-material">Select Material Type</div><div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Dropdown
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a class="selecttype"><input class="hiddeninp" value="3" type="hidden" />3D Models</a></li>
+            <li><a class="selecttype"><input class="hiddeninp" value="1" type="hidden" />Textures</a></li>
+            <li><a class="selecttype"><input class="hiddeninp" value="2" type="hidden" />Scripts</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a class="selecttype">All</a></li>
+        </ul>
+    </div>
+</div><!-- /.col-lg-6 -->
+
+<div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="row" id="search-materials">
+        @foreach (var material in Model.materials)
+        {
+            <div class="col-xs-6 col-sm-4 col-md-3">
+
+                <a href="@Url.Action("materials", "Home", new { id = material.index })" class="thumbnail">
+                    <img src="@material.imageurl" alt="...">
+                </a>
+
+            </div>
+        }
+
+    </div>
+</div>
