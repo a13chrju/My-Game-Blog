@@ -98,6 +98,10 @@ namespace WebApplication3.Controllers
 
             return View(blogg);
         }
+        public ActionResult Materials()
+        {
+            return View();
+        }
 
         public ActionResult FreeContent(int materialid = 1, int postid = 0)
         {
@@ -107,7 +111,7 @@ namespace WebApplication3.Controllers
             //all materials
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["test"].ToString();
-            MySqlCommand fetchdata = new MySqlCommand("SELECT * from materials", con);
+            MySqlCommand fetchdata = new MySqlCommand("SELECT * from materials ORDER BY RAND() LIMIT 4", con);
             con.Open();
             MySqlDataReader r = fetchdata.ExecuteReader();
 
@@ -177,6 +181,11 @@ namespace WebApplication3.Controllers
                 }
                 post.materials = allmaterials;
 
+                if (allmaterials.Count() != 0)
+                {
+                    model.selectedmaterial = allmaterials.First();
+                }
+            
 
                 posts.Add(post);
                 con4.Close();
