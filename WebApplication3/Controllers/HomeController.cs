@@ -98,6 +98,10 @@ namespace WebApplication3.Controllers
 
             return View(blogg);
         }
+        public ActionResult Materials()
+        {
+            return View();
+        }
 
         [Route("Home/Materials/{id?}")]
         public ActionResult Materials(int? id)
