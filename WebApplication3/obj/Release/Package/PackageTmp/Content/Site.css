@@ -502,3 +502,14 @@ body {
     border-radius: 4px;
     margin-bottom: 20px;
 }
+
+.hdtwo {
+    float: left;
+    margin: 0;
+    font-size: 1.4em;
+    /* padding: 10px; */
+    font-family: 'Reenie Beanie', cursive;
+    /* color: black; */
+    /* box-shadow: 0 0 black; */
+    text-shadow: 3px 2px 3px #a2a2a2;
+}
