@@ -65,6 +65,20 @@
             isup = true;
             console.log(isup);
         });
+
+        /* MENU */
+        $(".thumbnailpic").on("mouseover", function () {
+            $(this).find(".datum-placement-black").css("display", "block");
+            $(this).find(".datum-placement").css("display", "block");
+            $(this).css("box-shadow", "inset 5px 5px 30px rgb(255, 255, 255), inset -5px -5px 30px rgb(255, 255, 255)");
+          
+
+        });
+        $(".thumbnailpic").on("mouseleave", function () {
+            $(this).find(".datum-placement-black").css("display", "none");
+            $(this).find(".datum-placement").css("display", "none");
+            $(this).css("box-shadow", "initial");
+        });
     });
 
 </script>
@@ -78,53 +92,41 @@
             @foreach (var item in Model)
             {
 
-
-
-
                     <div class="media thumblist">
 
+                           <div style="position:absolute;z-index:998">
+                               <div class="number">#@item.episode</div>
+
+                               @if (item.materials.Count > 0)
+                               { // post has material
+                                   <div class="number">
+                                       @item.materials.Count()
+                                   <span class="glyphicon glyphicon-link"></span>
+                               </div>
+                               }
+                            </div> 
+
+                            <div class="col-sm-6 col-md-12 thumbnailpic" @if (item.materials.Count > 0) {<text>style="padding: 0; height: 180px;align-items: center;background-image: url(@item.materials.First().imageurl); background-size: cover;}"</text>}else{<text>style="padding: 0; height: 180px;align-items: center; background-size: cover;background:Black"</text>}>
 
 
-                            <div class="media-left-mine col-md-3" @if (item.materials.Count > 0) {<text>style="padding: 0; height: 100px;align-items: center;background-image: url(@item.materials.First().imageurl); background-size: cover;}"</text>}else{}>
-                                <span class="badge badge-small">
-                                    @if (item.datum != null)
-                                    {
-                                        @item.datum.Substring(0, 10)
-                                    }
-                                </span>
-
-                         
+                                <div class="datum-placement-black"></div>
+                                <div class="datum-placement">@item.datum</div>
 
                             </div>
-                            <div class="pin-this col-md-9" style="padding: 0;">
-                                @if (item.materials.Count > 0)
-                                    { // post has material
-                                    <div class="linklist-header">
-                                        <span class="glyphicon glyphicon-menu-down"></span> @item.materials.Count()
-                                        <span class="glyphicon glyphicon-link"></span>
-                                    </div>
-                                }
-                                else{ 
-                                    <div class="linklist-header">
-                                        <span class="glyphicon glyphicon-menu-down"></span> 
-                                    </div>
-                                }
+                            <div class="col-sm-6 col-md-12" style="padding: 0;text-align: center;">
+
                                 <div class="col-md-12" style="padding-top:10px">
                                         <p class="media-heading"> @* "linked" class *@
                                           <a href="@Url.Action("FreeContent", "Home", new { postid = item.index})">@item.titel</a> 
                                         <span class="glyphicon glyphicon-pushpin"></span>
                                     </p>
                                     <input type="hidden" class="hiddenpost" value="@item.index" />
-                           
                                 </div>
-                           
                             </div>
-                       
                     </div>
              
                     <!-- end number hashtag-->
 
-                <div class="number">#@item.episode</div>
             }
         </li>
     </ul>

@@ -181,6 +181,11 @@ namespace WebApplication3.Controllers
                 }
                 post.materials = allmaterials;
 
+                if (allmaterials.Count() != 0)
+                {
+                    model.selectedmaterial = allmaterials.First();
+                }
+            
 
                 posts.Add(post);
                 con4.Close();

@@ -51,7 +51,22 @@
             isup = true;
             console.log(isup);
         });
+   
+
+    /* MENU */
+    $(".thumbnailpic").on("mouseover", function () {
+        $(this).find(".datum-placement-black").css("display","block");
+        $(this).find(".datum-placement").css("display", "block");
+
     });
+    $(".thumbnailpic").on("mouseleave", function () {
+        $(this).find(".datum-placement-black").css("display", "none");
+        $(this).find(".datum-placement").css("display", "none");
+
+    });
+    });
+
+
 
 </script>
 
@@ -65,32 +80,26 @@
         @foreach (var item in Model)
             {
 
-
-
-
             <div class="media thumblist">
 
+                <div style="position:absolute;z-index:998">
+                    <div class="number">#@item.episode</div>
 
-
-                <div class="media-left-mine col-md-3" @if (item.materials.Count > 0) { <text> style="padding: 0; height: 100px;align-items: center;background-image: url(@item.materials.First().imageurl); background-size: cover;}" </text> } else { }>
-                    <span class="badge badge-small">
-                        @if (item.datum != null)
-                        {
-                            @item.datum.Substring(0, 10)
-                        }
-                    </span>
-
-
-
-                </div>
-                <div class="pin-this col-md-9" style="padding: 0;">
                     @if (item.materials.Count > 0)
                     { // post has material
-                        <div class="linklist-header">
-                            <span class="glyphicon glyphicon-menu-down"></span> materials: @item.materials.Count()
+                        <div class="number">
+                            @item.materials.Count()
                             <span class="glyphicon glyphicon-link"></span>
                         </div>
                     }
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-12 thumbnailpic" @if (item.materials.Count > 0) { <text> style="padding: 0; height: 180px;align-items: center;background-image: url(@item.materials.First().imageurl); background-size: cover;}" </text> } else { <text> style="padding: 0; height: 180px;align-items: center; background-size: cover;background:Black" </text> }>
+                    <div class="datum-placement-black"></div>
+                    <div class="datum-placement">@item.datum</div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-12" style="padding: 0;text-align: center;">
+
                     <div class="col-md-12" style="padding-top:10px">
                         <p class="media-heading">
                             @* "linked" class *@
@@ -98,19 +107,19 @@
                             <span class="glyphicon glyphicon-pushpin"></span>
                         </p>
                         <input type="hidden" class="hiddenpost" value="@item.index" />
-
                     </div>
-
                 </div>
-
             </div>
 
                     <!-- end number hashtag-->
 
-                    <div class="number">#1</div>
-}
+        }
     </li>
 </ul>
+
+
+
+
 
 
 
