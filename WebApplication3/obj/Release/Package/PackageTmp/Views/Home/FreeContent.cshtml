@@ -107,20 +107,40 @@
     
     <div class="col-md-8 col-md-push-4" style="padding:0;">
         @if (ViewBag.postid != 0 && hasvideo == true) //0 is default
-        {<div class="col-md-12" style="padding:0;margin-bottom:20px;box-shadow: 0px 1px 6px 0px #00000040;">
-            <div class="finmenuheader menu-title" style="color: black;">
-                <h4 class="media-heading" style="border-radius:initial !important">ATTACHED VIDEO</h4>
-            </div>
-            <div class="col-md-12 bread">
-                <div style='padding-left: 0;'>
-                    <div class='thumbnail'>
-                        <div class='gif-post'><div class='container2 pinned-video'><iframe src='@selectedpost.video_url' frameborder='0' autoplay='0' allowfullscreen class='video'></iframe></div></div>
+        {
+
+            <div class="col-md-12 post-wrapp" style="margin-bottom: 20px;">
+
+                <div class="col-md-12" style="padding-left: 0;    padding-right: 0;">
+                    <div class="thumbnail hoverclickzor">
+                        <div class="gif-post">
+                                <div class="container2" style="position: initial;">
+                                    <iframe src="@selectedpost.video_url" frameborder="0" autoplay="0" allowfullscreen class="video"></iframe>
+                                </div>
+                        </div>
                     </div>
                 </div>
 
             </div>
-        </div>
 
+
+
+            <!--  old video -->
+            @*
+        <div class="col-md-12" style="padding:0;margin-bottom:20px;box-shadow: 0px 1px 6px 0px #00000040;">
+        <div class="finmenuheader menu-title" style="color: black;">
+            <h4 class="media-heading" style="border-radius:initial !important">ATTACHED VIDEO</h4>
+        </div>
+        <div class="col-md-12 bread">
+            <div style='padding-left: 0;'>
+                <div class='thumbnail'>
+                    <div class='gif-post'><div class='container2 pinned-video'><iframe src='@selectedpost.video_url' frameborder='0' autoplay='0' allowfullscreen class='video'></iframe></div></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+            *@
 
 
         }
@@ -260,6 +280,9 @@
              
         </div>
     </div>
+    @{
+        Model.posts.Remove(selectedpost);
+    }
     <div class="col-md-4 col-md-pull-8" style="padding-left:0;padding-right:25px">@Html.Partial("_menu", Model.posts)</div>
 
 </div>

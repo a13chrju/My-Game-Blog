@@ -1,7 +1,9 @@
 ﻿@model List<WebApplication3.Models.blogg>
 @{
     ViewBag.Title = "_menu";
+
 }
+
 <script>
     var isup = false;
     $(document).ready(function () {
@@ -14,7 +16,7 @@
                 $("#black-pin").slideDown(0);
                 isup = false;
             }
-           
+
             var idpost = $(this).next().val();
            
 
@@ -23,22 +25,22 @@
               data: { id: idpost },
               success: function (data) {
 
-                    
-                  var output = "<div class='col-md-6 col-md-push-3' style='padding-left: 0;'><div class='thumbnail'><div class='gif-post'><div class='container2 pinned-video padd-bottom-0' ><iframe src='"+ data.video_url +"' frameborder='0' autoplay='0' allowfullscreen class='video'></iframe></div></div>";
-                      output += "<div class='caption'><h3>" + data.titel + "</h3><p>" + data.text + "</p>";
 
-                                        //<a href="#" class="btn btn-primary" role="button">cate.name</a>
-                      output += "</div></div></div>";
+                    var output = "<div class='col-md-6 col-md-push-3' style='padding-left: 0;'><div class='thumbnail'><div class='gif-post'><div class='container2 pinned-video padd-bottom-0' ><iframe src='"+ data.video_url +"' frameborder='0' autoplay='0' allowfullscreen class='video'></iframe></div></div>";
+                    output += "<div class='caption'><h3>" + data.titel + "</h3><p>" + data.text + "</p>";
+
+                    //<a href="#" class="btn btn-primary" role="button">cate.name</a>
+                    output += "</div></div></div>";
 
                       $(".pinned-post").html(output);
-                     
-                      setTimeout(function () { $(".pinned-video").removeClass("padd-bottom-0"); $("#close-pinned").css({ "display": "block" }); }, 1000);
-              },
-              error:function (xhr, ajaxOptions, thrownError){
-                              //some errror, some show err msg to user and log the error
-                              alert(xhr.responseText);
 
-                            }
+                    setTimeout(function () { $(".pinned-video").removeClass("padd-bottom-0"); $("#close-pinned").css({ "display": "block" }); }, 1000);
+                },
+              error:function (xhr, ajaxOptions, thrownError){
+                    //some errror, some show err msg to user and log the error
+                    alert(xhr.responseText);
+
+                }
             });
         });
 
@@ -58,12 +60,12 @@
         $(this).find(".datum-placement-black").css("display","block");
         $(this).find(".datum-placement").css("display", "block");
 
-    });
+        });
     $(".thumbnailpic").on("mouseleave", function () {
         $(this).find(".datum-placement-black").css("display", "none");
         $(this).find(".datum-placement").css("display", "none");
 
-    });
+        });
     });
 
 
@@ -76,25 +78,46 @@
         <div class="finmenuheader">
             <h4 class="menu-title media-heading" style="border-radius:initial !important">Gaming Updates</h4>
         </div>
+       
         <div class="small-space"></div>
         @foreach (var item in Model)
             {
-
+            <span></span>
+            if (item.latestpostID == item.index){<p style="text-align:center">LATEST POST</p>}
             <div class="media thumblist">
 
                 <div style="position:absolute;z-index:998">
-                    <div class="number">#@item.episode</div>
+                    <div class="number @if (item.latestpostID == item.index) {<text>isfirstpostsquare</text>}">#@item.episode</div>
 
                     @if (item.materials.Count > 0)
                     { // post has material
-                        <div class="number">
+                        <div class="number @if (item.latestpostID == item.index) {<text>isfirstpostsquare</text>}">
                             @item.materials.Count()
                             <span class="glyphicon glyphicon-link"></span>
                         </div>
                     }
-                </div>
 
-                <div class="col-xs-12 col-sm-6 col-md-12 thumbnailpic" @if (item.thumbnail != null && item.thumbnail != "") {<text> style="padding: 0; height: 180px;align-items: center;background-image: url(@item.thumbnail); background-size: cover;}" </text> } else if (item.materials.Count > 0) {
+                    <div style="
+                       
+                        margin: 0px 5px;
+                        background-color: #845050a3;
+                        padding: 10px;
+                        float: right;
+                        /* right: 0; */
+                        /* border-radius: 5px; */
+                    ">
+                    @if (item.category == 1)
+                    {
+                        @:DOTA INSPIRED GAME
+                    }
+                    else
+                    {
+                        @:MY FPS GAME
+                    }</div>
+                </div>
+               
+              
+                <div class="col-xs-12 col-sm-6 col-md-12 @if (item.latestpostID == item.index) {<text>isfirstpost</text>} thumbnailpic" @if (item.thumbnail != null && item.thumbnail != "") {<text> style="padding: 0; height: 180px;align-items: center;background-image: url(@item.thumbnail); background-size: cover;" </text> } else if (item.materials.Count > 0) {
                     <text> style="padding: 0; height: 180px;align-items: center;background-image: url(@item.materials.First().imageurl); background-size: cover;}" </text> }
                 else { <text> style="padding: 0; height: 180px;align-items: center; background-size: cover;background:Black" </text> }>
                     <div class="datum-placement-black"></div>

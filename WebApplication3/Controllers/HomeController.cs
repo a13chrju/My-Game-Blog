@@ -14,6 +14,23 @@ namespace WebApplication3.Controllers
     {
         public ActionResult Index()
         {
+            /*testes*/
+            MySqlConnection con7 = new MySqlConnection();
+            con7.ConnectionString = ConfigurationManager.ConnectionStrings["test"].ToString();
+            con7.Open();
+            var latestpost = 0;
+            MySqlCommand fetchdata7 = new MySqlCommand("SELECT id FROM post order by id desc limit 1", con7);
+            MySqlDataReader r7 = fetchdata7.ExecuteReader();
+            while (r7.Read())
+            {
+
+                latestpost = Convert.ToInt32(r7["id"]);
+
+            }
+
+            con7.Close();
+
+
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["test"].ToString();
             bloggs blogg = new bloggs();
@@ -43,6 +60,7 @@ namespace WebApplication3.Controllers
                 post.index = Convert.ToInt32(r2["id"]);
                 post.datum = r2["datum"].ToString();
                 post.video_url = r2["video_url"].ToString();
+                post.latestpostID = latestpost;
 
                 MySqlConnection con2 = new MySqlConnection();
                 con2.ConnectionString = ConfigurationManager.ConnectionStrings["test"].ToString();
@@ -96,7 +114,7 @@ namespace WebApplication3.Controllers
             con4.Close();
 
 
-
+            con4.Close();
             return View(blogg);
         }
 
@@ -190,7 +208,7 @@ namespace WebApplication3.Controllers
 
             con2.Open();
 
-            MySqlDataReader r2 = fetchdata2.ExecuteReader();
+           MySqlDataReader r2 = fetchdata2.ExecuteReader();
 
             List<blogg> posts = new List<blogg>();
 
@@ -344,6 +362,22 @@ namespace WebApplication3.Controllers
 
         public ActionResult page(int id)
         {
+            /*testes*/
+            MySqlConnection con7 = new MySqlConnection();
+            con7.ConnectionString = ConfigurationManager.ConnectionStrings["test"].ToString();
+            con7.Open();
+            var latestpost = 0;
+            MySqlCommand fetchdata7 = new MySqlCommand("SELECT id FROM post order by id desc limit 1", con7);
+            MySqlDataReader r7 = fetchdata7.ExecuteReader();
+            while (r7.Read())
+            {
+
+                latestpost = Convert.ToInt32(r7["id"]);
+
+            }
+
+            con7.Close();
+
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["test"].ToString();
             MySqlCommand fetchdata = new MySqlCommand("SELECT har_tagg.post_id,Tagg.namn FROM Tagg,har_tagg where har_tagg.tagg_id = Tagg.index", con);
@@ -410,6 +444,7 @@ namespace WebApplication3.Controllers
 
 
                 post.materials = allmaterials;
+                post.latestpostID = latestpost;
                 allbloggar.Add(post);
                 con2.Close();
             }
@@ -440,7 +475,8 @@ namespace WebApplication3.Controllers
             blogg.pagenation = pagenation2;
             con4.Close();
 
-
+          
+   
 
             return View("index", blogg);
         }

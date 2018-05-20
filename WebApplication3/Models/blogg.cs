@@ -16,5 +16,6 @@ namespace WebApplication3.Models
         public int episode { get; set; }
         public string thumbnail { get; set; }
         public List<material> materials { get; set; }
+        public int latestpostID { get; set; }
     }
 }
