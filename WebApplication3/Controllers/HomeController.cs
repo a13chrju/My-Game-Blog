@@ -496,5 +496,39 @@ namespace WebApplication3.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public ActionResult getepisodes(int categorytype)
+        {
+            MySqlConnection con41 = new MySqlConnection();
+            con41.ConnectionString = ConfigurationManager.ConnectionStrings["test"].ToString();
+            MySqlCommand fetchdata4 = new MySqlCommand("SELECT * from post where category = @category", con41);
+            fetchdata4.Parameters.AddWithValue("@category", categorytype);
+            con41.Open();
+            MySqlDataReader r4 = fetchdata4.ExecuteReader();
+
+
+            List<blogg> posts = new List<blogg>();
+           
+
+            while (r4.Read())
+            {
+                blogg post = new blogg();
+                post.index = Convert.ToInt32(r4["id"]);
+                post.titel = r4["titel"].ToString();
+                post.text = r4["text"].ToString();
+                post.episode = Convert.ToInt32(r4["episode"]);
+                post.thumbnail = r4["thumbnail"].ToString();
+                post.datum = r4["datum"].ToString();
+                post.video_url = r4["video_url"].ToString();
+                posts.Add(post);
+            }
+
+
+            con41.Close();
+
+
+            return Json(posts, JsonRequestBehavior.AllowGet);
+        }
     }
 }

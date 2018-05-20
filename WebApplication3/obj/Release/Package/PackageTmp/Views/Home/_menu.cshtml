@@ -76,7 +76,7 @@
 <ul class="media-list">
     <li class="media">
         <div class="finmenuheader">
-            <h4 class="menu-title media-heading" style="border-radius:initial !important">Gaming Updates</h4>
+            <p class="menu-title media-heading" style="border-radius:initial !important">Gaming Updates</p>
         </div>
        
         <div class="small-space"></div>
@@ -108,21 +108,20 @@
                     ">
                     @if (item.category == 1)
                     {
-                        @:DOTA INSPIRED GAME
+                        @:MY MOBA
                     }
                     else
                     {
                         @:MY FPS GAME
                     }</div>
                 </div>
-               
-              
-                <div class="col-xs-12 col-sm-6 col-md-12 @if (item.latestpostID == item.index) {<text>isfirstpost</text>} thumbnailpic" @if (item.thumbnail != null && item.thumbnail != "") {<text> style="padding: 0; height: 180px;align-items: center;background-image: url(@item.thumbnail); background-size: cover;" </text> } else if (item.materials.Count > 0) {
-                    <text> style="padding: 0; height: 180px;align-items: center;background-image: url(@item.materials.First().imageurl); background-size: cover;}" </text> }
-                else { <text> style="padding: 0; height: 180px;align-items: center; background-size: cover;background:Black" </text> }>
-                    <div class="datum-placement-black"></div>
-                    <div class="datum-placement">@item.datum</div>
-                </div>
+                <a href="@Url.Action("FreeContent", "Home", new { postid = item.index})">
+                    <div class="col-xs-12 col-sm-6 col-md-12 @if (item.latestpostID == item.index) {<text>isfirstpost</text>} thumbnailpic" @if (item.thumbnail != null && item.thumbnail != "") { <text> style="padding: 0; height: 180px;align-items: center;background-image: url(@item.thumbnail); background-size: cover;" </text>  } else if (item.materials.Count > 0) { <text> style="padding: 0; height: 180px;align-items: center;background-image: url(@item.materials.First().imageurl); background-size: cover;}" </text>  } else { <text> style="padding: 0; height: 180px;align-items: center; background-size: cover;background:Black" </text>  }>
+                        <div class="datum-placement-black"></div>
+                        <div class="datum-placement">@item.datum</div>
+                    </div>
+                </a>
+
                 <div class="col-xs-12 col-sm-6 col-md-12" style="padding: 0;text-align: center;">
 
                     <div class="col-md-12" style="padding-top:10px">

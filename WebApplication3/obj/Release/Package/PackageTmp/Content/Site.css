@@ -244,14 +244,13 @@ textarea {
 
 .menu-title {
     /* border: 1px solid #7180a2; */
-    color: #fff;
+    color: white;
     /* text-shadow: 3px 2px 1px #7a7a7a; */
     background: #2e488666;
     /* height: 40px; */
     /* padding-left: 20px; */
     line-height: 40px;
     text-transform: uppercase;
-    font-size: 1.3em;
     text-align: center;
     font-weight: 400 !important;
 }
@@ -391,7 +390,7 @@ body {
 
 .scribblefont {
     font-family: 'Reenie Beanie', cursive;
-    font-size: 3em;
+    font-size: 2.1em;
     /* text-transform: uppercase; */
     /* word-spacing: -12px; */
     text-align: center;
@@ -489,7 +488,7 @@ body {
     background-position:center center;
 }
 .datum-placement {
-    line-height: 180px;
+    line-height: 180px;color:white;
     text-align: center;display:none;
 }
 .datum-placement-black {
@@ -522,3 +521,72 @@ body {
     background: orange !important;
     border: none !important;
 }
+
+.menu-expander {
+    padding-left: 0;
+    padding-right: 25px
+}
+
+@media (max-width:767px) {
+    .menu-expander {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .datum {
+        text-align: center !important;
+    }
+    .innerpictext {
+        position: relative !important;
+        background: rgba(0, 0, 0, 1);
+        padding: 20px;
+        border-radius: 3px;
+        color: white;
+        margin: 0 !important;
+    }
+
+    .mobilehead {
+        width: 100% !important;
+    }
+
+    .datebar {
+        width: 100% !important;
+    }
+
+    .glyphicon-calendar {
+        margin-left: initial !important;
+        position: relative !important;
+    }
+}
+
+.mobilehead {
+    text-align: center;
+    margin: 0;
+    font-family: 'Reenie Beanie', cursive;
+    color: white;
+    text-shadow: 5px -1px 3px #273a63;
+    line-height: 37px;
+    width: 200px;
+    border: 1px solid;
+    border-radius: 20px;
+    float: right;
+    background-color: #fefeff;
+    cursor:pointer;
+    box-shadow: 3px 3px 9px #00000075;
+    background-color: #778fc3;
+}
+
+.mobilehead:hover {
+    background-color: #e67a53
+}
+
+.titletop {
+    font-size: 1.8em;
+}
+
+.pagination {
+    margin-top:0;
+}
+    .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+        background-color: #abb6cf;
+        border-color: #5d709c;
+    }

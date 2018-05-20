@@ -31,8 +31,8 @@
 
         $(".selecttype").on("click", function () {
             var hiddenval = $(this).find(".hiddeninp").val();
-          
-           
+
+
             $.ajax({
                 url: '@Url.Action("getmatcategory", "Home")',
                 data: { id: hiddenval },
@@ -45,7 +45,7 @@
                     if (data.length <= 0){
                         output += "<div class='col-md-12'>Sorry Pal, no Materials of this Type exist right now.</div>"
                             }
-                  
+
 
                   $("#search-materials").html(output);
 
@@ -62,7 +62,48 @@
 
 
     });
+    var isclicked = false;
 
+    function fetchepisodes(varde) {
+
+        if (isclicked == false){
+                    if (varde != null){
+
+               $.ajax({
+                url: '@Url.Action("getepisodes", "Home")',
+                data: { categorytype: varde },
+                success: function (data) {
+                    console.log(data);
+                    var output = "<ul class='list-group'>";
+                    for (var i = 0; i < data.length; i++){
+                        output += "<li class='list-group-item'><span class='badge' style='line-height:initial !Important'>"+data[i].episode +"</span><a href='/Home/FreeContent?postid="+data[i].index+"'>"+data[i].titel+"</a></li>";
+                    }
+                    if (data.length <= 0){
+                        output += "<div class='col-md-12'>Sorry Pal, no Materials of this Type exist right now.</div>"
+                    }
+
+                    output += "</ul>";
+
+
+                    $("#allepisodes").html(output);
+
+
+                },
+              error:function (xhr, ajaxOptions, thrownError){
+                    //some errror, some show err msg to user and log the error
+                    alert(xhr.responseText);
+
+                }
+                        });
+               isclicked = true;
+            }
+        } else {
+            $("#allepisodes").html("");
+            isclicked = false;
+        }
+
+
+    }
 </script>
 @section bannertype{
 @if (selectedpost != null)
@@ -72,7 +113,7 @@
             <div class="container body-content" style="    background-color: #ffffff5c;border: 0;">
                 <div class="row">
                     <div class="col-md-6 col-md-push-6">
-                        <div class="mobilehead">
+                        <div class="mobilehead" onclick="fetchepisodes(@selectedpost.category)">
                             @if (selectedpost.category == 1)
                             {
                                 <span class="titletop">MY MOBA</span>
@@ -103,7 +144,9 @@
 
 <div class="row">
 
+    <div id="allepisodes"><!-- allepisodes for a game category-->
 
+    </div>
 
 
     
