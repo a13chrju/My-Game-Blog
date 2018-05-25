@@ -426,6 +426,7 @@ namespace WebApplication3.Controllers
                 blogg post = new blogg();
                 post.titel = r2["titel"].ToString();
                 post.text = r2["text"].ToString();
+                post.thumbnail = r2["thumbnail"].ToString();
                 post.episode = Convert.ToInt32(r2["episode"]);
                 post.category = Convert.ToInt32(r2["category"]);
                 post.index = Convert.ToInt32(r2["id"]);

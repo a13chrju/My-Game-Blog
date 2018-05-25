@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="test-Web.config Connection String" description="test Connection String used in web.config by the application to access the database." defaultValue="Server=MYSQL6002.site4now.net;Database=db_a3b3b7_kawaii;Uid=a3b3b7_kawaii;Pwd=redsn4pfisk;persist security info=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Kristofer\\documents\\visual\ studio\ 2017\\Projects\\WebApplication3\\WebApplication3\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='test']/@connectionString" />
+  </parameter>
+</parameters>

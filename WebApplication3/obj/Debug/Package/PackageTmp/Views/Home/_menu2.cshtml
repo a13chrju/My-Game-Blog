@@ -1,0 +1,133 @@
+﻿@model List<WebApplication3.Models.blogg>
+@{
+    ViewBag.Title = "_menu";
+}
+
+
+@*
+
+     @if(item.materials.Count > 0){ // post has material
+               <style> .thumblist {align-items: center;background-image: url(@item.materials.First().imageurl); background-size: cover;}</style>
+
+
+        else
+        { //display nopic
+                              <div class="media thumblist"  style="align-items: center;background-image: url(http://comingmovies.org/img/nopic.jpg); background-size: cover;">
+    }
+*@
+
+<script>
+    var isup = false;
+    $(document).ready(function () {
+       
+
+        $(".linked").on("click", function () {
+            $(".fixed-menu").css({ "position": "absolute" });
+            if (isup == true) {
+                $(".pinned-post").html("");
+                $("#black-pin").slideDown(0);
+                isup = false;
+            }
+           
+            var idpost = $(this).next().val();
+           
+
+            $.ajax({
+                url: '@Url.Action("pinpost", "Home")',
+              data: { id: idpost },
+              success: function (data) {
+
+                    
+                  var output = "<div class='col-md-6 col-md-push-3' style='padding-left: 0;'><div class='thumbnail'><div class='gif-post'><div class='container2 pinned-video padd-bottom-0' ><iframe src='"+ data.video_url +"' frameborder='0' autoplay='0' allowfullscreen class='video'></iframe></div></div>";
+                      output += "<div class='caption'><h3>" + data.titel + "</h3><p>" + data.text + "</p>";
+
+                                        //<a href="#" class="btn btn-primary" role="button">cate.name</a>
+                      output += "</div></div></div>";
+
+                      $(".pinned-post").html(output);
+                     
+                      setTimeout(function () { $(".pinned-video").removeClass("padd-bottom-0"); $("#close-pinned").css({ "display": "block" }); }, 1000);
+              },
+              error:function (xhr, ajaxOptions, thrownError){
+                              //some errror, some show err msg to user and log the error
+                              alert(xhr.responseText);
+
+                            }
+            });
+        });
+
+
+
+        $("#close-pinned").on("click", function () {
+            $("#close-pinned").css({ "display": "none" });
+            $(".fixed-menu").css({ "position": "fixed" });
+            $("#black-pin").slideUp(1000);
+            isup = true;
+            console.log(isup);
+        });
+
+        /* MENU */
+        $(".thumbnailpic").on("mouseover", function () {
+            $(this).find(".datum-placement-black").css("display", "block");
+            $(this).find(".datum-placement").css("display", "block");
+            $(this).css("box-shadow", "inset 5px 5px 30px rgb(255, 255, 255), inset -5px -5px 30px rgb(255, 255, 255)");
+          
+
+        });
+        $(".thumbnailpic").on("mouseleave", function () {
+            $(this).find(".datum-placement-black").css("display", "none");
+            $(this).find(".datum-placement").css("display", "none");
+            $(this).css("box-shadow", "initial");
+        });
+    });
+
+</script>
+
+    <ul class="media-list">
+        <li class="media">
+            <div class="finmenuheader">
+                <h4 class="menu-title media-heading" style="border-radius:initial !important">Gaming Updates</h4>
+            </div>
+            <div class="small-space"></div>
+            @foreach (var item in Model)
+            {
+
+                    <div class="media thumblist">
+
+                           <div style="position:absolute;z-index:998">
+                               <div class="number">#@item.episode</div>
+
+                               @if (item.materials.Count > 0)
+                               { // post has material
+                                   <div class="number">
+                                       @item.materials.Count()
+                                   <span class="glyphicon glyphicon-link"></span>
+                               </div>
+                               }
+                            </div> 
+
+                            <div class="col-sm-6 col-md-12 thumbnailpic" @if (item.materials.Count > 0) {<text>style="padding: 0; height: 180px;align-items: center;background-image: url(@item.materials.First().imageurl); background-size: cover;}"</text>}else{<text>style="padding: 0; height: 180px;align-items: center; background-size: cover;background:Black"</text>}>
+
+
+                                <div class="datum-placement-black"></div>
+                                <div class="datum-placement">@item.datum</div>
+
+                            </div>
+                            <div class="col-sm-6 col-md-12" style="padding: 0;text-align: center;">
+
+                                <div class="col-md-12" style="padding-top:10px">
+                                        <p class="media-heading"> @* "linked" class *@
+                                          <a href="@Url.Action("FreeContent", "Home", new { postid = item.index})">@item.titel</a> 
+                                        <span class="glyphicon glyphicon-pushpin"></span>
+                                    </p>
+                                    <input type="hidden" class="hiddenpost" value="@item.index" />
+                                </div>
+                            </div>
+                    </div>
+             
+                    <!-- end number hashtag-->
+
+            }
+        </li>
+    </ul>
+

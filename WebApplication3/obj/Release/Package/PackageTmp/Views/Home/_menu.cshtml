@@ -82,10 +82,10 @@
         <div class="small-space"></div>
         @foreach (var item in Model)
             {
-            <span></span>
+            <span style="display:none">@item.thumbnail</span>
             if (item.latestpostID == item.index){<p style="text-align:center">LATEST POST</p>}
             <div class="media thumblist">
-
+             
                 <div style="position:absolute;z-index:998">
                     <div class="number @if (item.latestpostID == item.index) {<text>isfirstpostsquare</text>}">#@item.episode</div>
 
