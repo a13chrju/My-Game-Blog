@@ -143,4 +143,6 @@ C:\Users\Kristofer\documents\visual studio 2017\Projects\WebApplication3\WebAppl
 C:\Users\Kristofer\documents\visual studio 2017\Projects\WebApplication3\WebApplication3\bin\Microsoft.AI.Web.xml
 C:\Users\Kristofer\documents\visual studio 2017\Projects\WebApplication3\WebApplication3\obj\Debug\WebApplication3.dll
 C:\Users\Kristofer\documents\visual studio 2017\Projects\WebApplication3\WebApplication3\obj\Debug\WebApplication3.pdb
-C:\Users\Kristofer\documents\visual studio 2017\Projects\WebApplication3\WebApplication3\obj\Debug\WebApplication3.csprojResolveAssemblyReference.cache
+C:\Users\Kristofer\documents\visual studio 2017\Projects\WebApplication3\WebApplication3\obj\Debug\WebApplication3.csprojAssemblyReference.cache
+C:\Users\Kristofer\documents\visual studio 2017\Projects\WebApplication3\WebApplication3\obj\Debug\WebApplication3.csproj.CoreCompileInputs.cache
+C:\Users\Kristofer\documents\visual studio 2017\Projects\WebApplication3\WebApplication3\obj\Debug\WebApplication3.csproj.CopyComplete

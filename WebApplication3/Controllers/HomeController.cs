@@ -12,6 +12,11 @@ namespace WebApplication3.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult Firstpage()
+        {
+            return View();
+        }
+
         public ActionResult Index()
         {
             /*testes*/
@@ -65,7 +70,7 @@ namespace WebApplication3.Controllers
                 MySqlConnection con2 = new MySqlConnection();
                 con2.ConnectionString = ConfigurationManager.ConnectionStrings["test"].ToString();
                 con2.Open();
-                MySqlCommand fetchdata3 = new MySqlCommand("SELECT har_material.post_id,materials.imageurl,materials.type,materials.index FROM materials,har_material,post where har_material.material_id = materials.index and har_material.post_id = post.id and har_material.post_id = @id" , con2);
+                MySqlCommand fetchdata3 = new MySqlCommand("SELECT har_material.post_id,materials.imageurl,materials.type,materials.id FROM materials,har_material,post where har_material.material_id = materials.id and har_material.post_id = post.id and har_material.post_id = @id" , con2);
                 fetchdata3.Parameters.AddWithValue("@id", Convert.ToInt32(r2["id"]));
 
                 MySqlDataReader r3 = fetchdata3.ExecuteReader();
@@ -74,7 +79,7 @@ namespace WebApplication3.Controllers
                 while (r3.Read())
                 {
                     material material = new material();
-                    material.index = Convert.ToInt32(r3["index"]);
+                    material.index = Convert.ToInt32(r3["id"]);
                     material.postid = Convert.ToInt32(r3["post_id"]);
                     material.imageurl = r3["imageurl"].ToString();
                     material.type = Convert.ToInt32(r3["type"]);
@@ -136,7 +141,7 @@ namespace WebApplication3.Controllers
             while (r3.Read())
             {
                 material material = new material();
-                material.index = Convert.ToInt32(r3["index"]);
+                material.index = Convert.ToInt32(r3["id"]);
                 material.description = r3["description"].ToString();
                 material.BlenderFile = r3["BlenderFile"].ToString();
                 material.imageurl = r3["imageurl"].ToString();
@@ -154,14 +159,14 @@ namespace WebApplication3.Controllers
                 MySqlConnection con5 = new MySqlConnection();
                 con5.ConnectionString = ConfigurationManager.ConnectionStrings["test"].ToString();
                 con5.Open();
-                MySqlCommand fetchdata5 = new MySqlCommand("SELECT * from materials where materials.index = @id", con5);
+                MySqlCommand fetchdata5 = new MySqlCommand("SELECT * from materials where materials.id = @id", con5);
                 fetchdata5.Parameters.AddWithValue("@id", id);
                 MySqlDataReader r5 = fetchdata5.ExecuteReader();
 
                 while (r5.Read())
                 {
                     material material = new material();
-                    material.index = Convert.ToInt32(r5["index"]);
+                    material.index = Convert.ToInt32(r5["id"]);
                     material.description = r5["description"].ToString();
                     material.BlenderFile = r5["BlenderFile"].ToString();
                     material.imageurl = r5["imageurl"].ToString();
@@ -177,6 +182,26 @@ namespace WebApplication3.Controllers
 
         public ActionResult FreeContent(int materialid = 1, int postid = 0)
         {
+
+            MySqlConnection con44 = new MySqlConnection();
+            con44.ConnectionString = ConfigurationManager.ConnectionStrings["test"].ToString();
+            MySqlCommand fetchdata44 = new MySqlCommand("SELECT category from post where id =@id", con44);
+            fetchdata44.Parameters.AddWithValue("@id", postid);
+            con44.Open();
+            MySqlDataReader r44 = fetchdata44.ExecuteReader();
+
+            int categorytype = 0;
+
+            while (r44.Read())
+            {
+                categorytype = Convert.ToInt32(r44["category"]);
+            }
+
+            con44.Close();
+            /* */
+
+
+
             ViewBag.materialid = materialid;
             ViewBag.postid = postid;
             var model = new matpost();
@@ -192,7 +217,7 @@ namespace WebApplication3.Controllers
             while (r.Read())
             {
                 material material = new material();
-                material.index = Convert.ToInt32(r["index"]);
+                material.index = Convert.ToInt32(r["id"]);
                 material.imageurl = r["imageurl"].ToString();
                 material.description = r["description"].ToString();
                 material.type = Convert.ToInt32(r["type"]);
@@ -207,7 +232,8 @@ namespace WebApplication3.Controllers
 
             MySqlConnection con2 = new MySqlConnection();
             con2.ConnectionString = ConfigurationManager.ConnectionStrings["test"].ToString();
-            MySqlCommand fetchdata2 = new MySqlCommand("SELECT * FROM post ORDER BY RAND() LIMIT 6", con2);
+            MySqlCommand fetchdata2 = new MySqlCommand("SELECT * FROM post where category = @category ORDER BY Id desc LIMIT 6", con2);
+            fetchdata2.Parameters.AddWithValue("@category", categorytype);
 
             con2.Open();
 
@@ -226,7 +252,7 @@ namespace WebApplication3.Controllers
 
                 blogg post = new blogg();
                 post.titel = r2["titel"].ToString();
-                post.datum = r2["datum"].ToString();
+                post.datum = r2["datum"].ToString().Substring(0,9);
                 post.text = r2["text"].ToString();
                 post.episode = Convert.ToInt32(r2["episode"]);
                 post.thumbnail = r2["thumbnail"].ToString();
@@ -238,7 +264,7 @@ namespace WebApplication3.Controllers
                 MySqlConnection con4 = new MySqlConnection();
                 con4.ConnectionString = ConfigurationManager.ConnectionStrings["test"].ToString();
                 con4.Open();
-                MySqlCommand fetchdata3 = new MySqlCommand("SELECT har_material.post_id,materials.imageurl,materials.BlenderFile,materials.type,materials.index FROM materials,har_material,post where har_material.material_id = materials.index and har_material.post_id = post.id and har_material.post_id = @id", con4);
+                MySqlCommand fetchdata3 = new MySqlCommand("SELECT har_material.post_id,materials.imageurl,materials.BlenderFile,materials.type,materials.id FROM materials,har_material,post where har_material.material_id = materials.id and har_material.post_id = post.id and har_material.post_id = @id", con4);
                 fetchdata3.Parameters.AddWithValue("@id", Convert.ToInt32(r2["id"]));
 
                 MySqlDataReader r3 = fetchdata3.ExecuteReader();
@@ -247,7 +273,7 @@ namespace WebApplication3.Controllers
                 while (r3.Read())
                 {
                     material material = new material();
-                    material.index = Convert.ToInt32(r3["index"]);
+                    material.index = Convert.ToInt32(r3["id"]);
                     material.postid = Convert.ToInt32(r3["post_id"]);
                     material.BlenderFile = r3["BlenderFile"].ToString();
                     material.imageurl = r3["imageurl"].ToString();
@@ -267,6 +293,7 @@ namespace WebApplication3.Controllers
             }
             model.posts = posts;
 
+            model.selectedpost = posts.Where(x => x.index == postid).FirstOrDefault();
 
 
             con2.Close();
@@ -325,7 +352,7 @@ namespace WebApplication3.Controllers
             while (r.Read())
             {
                 material material = new material();
-                material.index = Convert.ToInt32(r["index"]);
+                material.index = Convert.ToInt32(r["id"]);
                 material.imageurl = r["imageurl"].ToString();
                 material.description = r["description"].ToString();
                 material.type = Convert.ToInt32(r["type"]);
@@ -436,7 +463,7 @@ namespace WebApplication3.Controllers
                 MySqlConnection con2 = new MySqlConnection();
                 con2.ConnectionString = ConfigurationManager.ConnectionStrings["test"].ToString();
                 con2.Open();
-                MySqlCommand fetchdata3 = new MySqlCommand("SELECT har_material.post_id,materials.imageurl,materials.type,materials.index FROM materials,har_material,post where har_material.material_id = materials.index and har_material.post_id = post.id and har_material.post_id = @id", con2);
+                MySqlCommand fetchdata3 = new MySqlCommand("SELECT har_material.post_id,materials.imageurl,materials.type,materials.id FROM materials,har_material,post where har_material.material_id = materials.id and har_material.post_id = post.id and har_material.post_id = @id", con2);
                 fetchdata3.Parameters.AddWithValue("@id", Convert.ToInt32(r2["id"]));
                 MySqlDataReader r3 = fetchdata3.ExecuteReader();
 
@@ -444,7 +471,7 @@ namespace WebApplication3.Controllers
                 while (r3.Read())
                 {
                     material material = new material();
-                    material.index = Convert.ToInt32(r3["index"]);
+                    material.index = Convert.ToInt32(r3["id"]);
                     material.postid = Convert.ToInt32(r3["post_id"]);
                     material.imageurl = r3["imageurl"].ToString();
                     material.type = Convert.ToInt32(r3["type"]);

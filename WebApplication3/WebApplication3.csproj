@@ -168,8 +168,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\banner1.jpg" />
+    <Content Include="Content\bannerFPS.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fps1y.PNG" />
     <Content Include="Content\unityencoded.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -214,6 +216,7 @@
     <Content Include="Views\Home\FreeContent.cshtml" />
     <Content Include="Views\Home\_menu2.cshtml" />
     <Content Include="Views\Home\Materials.cshtml" />
+    <Content Include="Views\Home\Firstpage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

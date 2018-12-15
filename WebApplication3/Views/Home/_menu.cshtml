@@ -4,82 +4,33 @@
 
 }
 
-<script>
-    var isup = false;
-    $(document).ready(function () {
-       
+   <script>
+       $(function () {
 
-        $(".linked").on("click", function () {
-            $(".fixed-menu").css({ "position": "absolute" });
-            if (isup == true) {
-                $(".pinned-post").html("");
-                $("#black-pin").slideDown(0);
-                isup = false;
-            }
+           /* MENU */
+           $(".thumbnailpic").on("mouseover", function () {
+               $(this).find(".datum-placement-black").css("display", "block");
+               $(this).find(".datum-placement").css("display", "block");
 
-            var idpost = $(this).next().val();
-           
+           });
+           $(".thumbnailpic").on("mouseleave", function () {
+               $(this).find(".datum-placement-black").css("display", "none");
+               $(this).find(".datum-placement").css("display", "none");
 
-            $.ajax({
-                url: '@Url.Action("pinpost", "Home")',
-              data: { id: idpost },
-              success: function (data) {
+           });
 
+         
+         /*  $(".menu-expander").animate({
+               left: "0",
+               opacity: "1"
+           }, 800, function () {
 
-                    var output = "<div class='col-md-6 col-md-push-3' style='padding-left: 0;'><div class='thumbnail'><div class='gif-post'><div class='container2 pinned-video padd-bottom-0' ><iframe src='"+ data.video_url +"' frameborder='0' autoplay='0' allowfullscreen class='video'></iframe></div></div>";
-                    output += "<div class='caption'><h3>" + data.titel + "</h3><p>" + data.text + "</p>";
-
-                    //<a href="#" class="btn btn-primary" role="button">cate.name</a>
-                    output += "</div></div></div>";
-
-                      $(".pinned-post").html(output);
-
-                    setTimeout(function () { $(".pinned-video").removeClass("padd-bottom-0"); $("#close-pinned").css({ "display": "block" }); }, 1000);
-                },
-              error:function (xhr, ajaxOptions, thrownError){
-                    //some errror, some show err msg to user and log the error
-                    alert(xhr.responseText);
-
-                }
-            });
-        });
-
-
-
-        $("#close-pinned").on("click", function () {
-            $("#close-pinned").css({ "display": "none" });
-            $(".fixed-menu").css({ "position": "fixed" });
-            $("#black-pin").slideUp(1000);
-            isup = true;
-            console.log(isup);
-        });
-   
-
-    /* MENU */
-    $(".thumbnailpic").on("mouseover", function () {
-        $(this).find(".datum-placement-black").css("display","block");
-        $(this).find(".datum-placement").css("display", "block");
-
-        });
-    $(".thumbnailpic").on("mouseleave", function () {
-        $(this).find(".datum-placement-black").css("display", "none");
-        $(this).find(".datum-placement").css("display", "none");
-
-        });
-    });
-
-
+           });
+           */
+       });
 
 </script>
 
-   
-<ul class="media-list">
-    <li class="media">
-        <div class="finmenuheader">
-            <p class="menu-title media-heading" style="border-radius:initial !important">Gaming Updates</p>
-        </div>
-       
-        <div class="small-space"></div>
         @foreach (var item in Model)
             {
             <span style="display:none">@item.thumbnail</span>
@@ -124,7 +75,7 @@
 
                 <div class="col-xs-12 col-sm-6 col-md-12" style="padding: 0;text-align: center;">
 
-                    <div class="col-md-12" style="padding-top:10px">
+                    <div class="col-md-12" style="padding:20px">
                         <p class="media-heading">
                             @* "linked" class *@
                             <a href="@Url.Action("FreeContent", "Home", new { postid = item.index})">@item.titel</a>
@@ -138,38 +89,3 @@
                     <!-- end number hashtag-->
 
         }
-    </li>
-</ul>
-
-
-
-
-
-
-
-    @*
-
-    <ul class="media-list">
-        <li class="media">
-            <div class="media-left">
-            </div>
-            <div class="media-body">
-                <h4 class="menu-title media-heading">Gaming</h4>
-            </div>
-            <div class="small-space"></div>
-            @foreach (var item in Model.OrderBy(x => x.episode))
-            {
-                if (item.category == 0)
-                {
-                    <div class="media">
-                        <div class="media-left">
-                        </div>
-                        <div class="media-body pin-this">
-                            <span class="badge badge-small">Ep @item.episode</span><p class="media-heading linked">@item.titel<span class="glyphicon glyphicon-pushpin"></span></p> <input type="hidden" class="hiddenpost" value="@item.index" />
-                        </div>
-                    </div>
-                }
-            }
-        </li>
-    </ul>*@
-

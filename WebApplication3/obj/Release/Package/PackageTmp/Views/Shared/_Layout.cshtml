@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="~/Content/site.css?v=@DateTime.Now">
     @Scripts.Render("~/bundles/modernizr")
     <link href="https://fonts.googleapis.com/css?family=Reenie+Beanie" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -23,18 +25,40 @@
                 </button>
                 @Html.ActionLink("Dev vlog", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
+
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Free Textures/models", "materials", "Home")</li>
                 </ul>
-
-                <ul class="nav navbar-nav hidden-xs" style="float:right">
-                    <li><a>*13 free materials and counting!*</a></li>
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("HomePage", "Firstpage", "Home")</li>
                 </ul>
-            </div>
+                <ul class="nav navbar-nav isclicked" id="menu" style="float:right;cursor:pointer">
+                    <li><a><span style="font-size:1.3em" class="glyphicon glyphicon-bullhorn"></span></a></li>
+                </ul>
+                <ul class="nav navbar-nav hidden-xs hidden-sm" style="float:right">
+                    <li><a>*13 free materials and countingss!*</a></li>
+                </ul>
 
+            </div>
+        
 
         </div>
+    </div>
+    <div class="sidetoolbar">
+        <h3>List to complete:</h3>
+        <ol class="rounded-list">
+            <li><a href="">add mini machine gun</a></li>
+            <li><a href="">add leaderboard</a></li>
+            <li>
+                <a href="">"kings of hill" activated</a>
+                <ol>
+                    <li><a href="">insta kills</a></li>
+                </ol>
+            </li>
+            <li><a href="">Start Lobby</a></li>
+        </ol>
+
     </div>
     @RenderSection("bannertype", required: false)
  
@@ -56,5 +80,29 @@
     </div>
 
     @RenderSection("scripts", required: false)
+    <script>
+
+        $(function () {
+
+            $("#menu").on("click", function () {
+                if ($(this).hasClass("isclicked")) {
+                    $(this).removeClass("isclicked");
+                    $(".sidetoolbar").css({ "margin-right": "0px" });
+                } else {
+                    $(this).addClass("isclicked");
+                    $(".sidetoolbar").css({ "margin-right": "-350px" });
+                }
+
+              
+
+
+              
+
+            });
+
+
+        });
+  
+    </script>
 </body>
 </html>

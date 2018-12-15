@@ -2,23 +2,23 @@
 @{
     ViewBag.Title = "FreeContent";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var selectedpost = Model.posts.Where(x => x.index == ViewBag.postid).FirstOrDefault();
+
 
     var field = "0 ATTACHED MATERIALS";
     var hasvideo = true;
 
-    if (selectedpost != null)
+    if (Model.selectedpost != null)
     {
-        if (selectedpost.materials.Count > 0)
+        if (Model.selectedpost.materials.Count > 0)
         {
-            field = selectedpost.materials.Count + " ATTACHED MATERIAL(S):";
+            field = Model.selectedpost.materials.Count + " ATTACHED MATERIAL(S):";
         }
 
-        if (selectedpost.video_url == null || selectedpost.video_url == "")
+        if (Model.selectedpost.video_url == null || Model.selectedpost.video_url == "")
         {
             hasvideo = false;
         }
-        
+
     }
 }
 
@@ -106,38 +106,59 @@
     }
 </script>
 @section bannertype{
-@if (selectedpost != null)
+@if (Model.selectedpost != null)
 {
-
+    if (Model.selectedpost.category == 1)
+    {
         <div class="bannercategory">
             <div class="container body-content" style="    background-color: #ffffff5c;border: 0;">
                 <div class="row">
                     <div class="col-md-6 col-md-push-6">
-                        <div class="mobilehead" onclick="fetchepisodes(@selectedpost.category)">
-                            @if (selectedpost.category == 1)
-                            {
+                        <div class="mobilehead" onclick="fetchepisodes(@Model.selectedpost.category)">
                                 <span class="titletop">MY MOBA</span>
-                            }
-                            else
-                            {
-                                <span class="titletop">MY FPS GAME</span>
-                            }
                         </div>
                     </div>
                     <div class="col-md-6 col-md-pull-6">
                         <div class="datebar">
                             <span class="glyphicon glyphicon-calendar" style="float: left;"></span>
-                            <span style="margin-left: 10px;">@selectedpost.datum</span>
+                            <span style="margin-left: 10px;">@Model.selectedpost.datum</span>
                         </div>
                         <div class="datebar">
-                            Episode: @selectedpost.episode
+                            Episode: @Model.selectedpost.episode
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
-    
+    }
+    else
+    {
+        <div class="bannercategory">
+            <div class="container body-content" style="background-image:url('../../Content/bannerFPS.jpg');height:200px;border: 0;">
+                <div class="row">
+                    <div class="col-md-6 col-md-push-6">
+                        <div class="mobilehead" onclick="fetchepisodes(@Model.selectedpost.category)">
+                                <span class="titletop">MY FPS GAME</span>
+                        
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-md-pull-6">
+                        <div class="datebar">
+                            <span class="glyphicon glyphicon-calendar" style="float: left;"></span>
+                            <span style="margin-left: 10px;">@Model.selectedpost.datum</span>
+                        </div>
+                        <div class="datebar">
+                            Episode: @Model.selectedpost.episode
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+
+
 }
 }
 
@@ -151,8 +172,9 @@
 
     
     <div class="col-xs-12 col-md-8 col-md-push-4" style="padding:0;">
-        @if (ViewBag.postid != 0 && hasvideo == true) //0 is default
-        {
+    @if ((Model.selectedpost != null)) {
+    if (ViewBag.postid != 0 && hasvideo == true) //0 is default
+    {
 
             <div class="col-md-12 col-xs-12 post-wrapp" style="margin-bottom: 20px;">
 
@@ -160,7 +182,7 @@
                     <div class="thumbnail hoverclickzor">
                         <div class="gif-post">
                                 <div class="container2" style="position: initial;">
-                                    <iframe src="@selectedpost.video_url" frameborder="0" autoplay="0" allowfullscreen class="video"></iframe>
+                                    <iframe src="@Model.selectedpost.video_url" frameborder="0" autoplay="0" allowfullscreen class="video"></iframe>
                                 </div>
                         </div>
                     </div>
@@ -170,18 +192,18 @@
 
 
 
-        }
+                } }
            
-            @if ((selectedpost != null))
+            @if ((Model.selectedpost != null))
             { 
                 <div class="col-md-12 col-xs-12" style="padding:0;margin-bottom:20px;    padding-bottom: 20px;box-shadow: 0px 1px 6px 0px #00000040;">
-                    <div class="finmenuheader menu-title" style="color: black;">
+                    <div class="finmenuheader menu-title">
                         <p class="media-heading" style="border-radius:initial !important">Developer log</p>
                     </div>
                     <div class="col-md-12 col-xs-12 bread">
                         <div class='caption'>
-                            <h3 class="scribblefont">@selectedpost.titel</h3>
-                            <p style="text-align:center">@selectedpost.text</p>
+                            <h3>@Model.selectedpost.titel</h3><hr />
+                            @Html.Raw(Model.selectedpost.text)
 
 
                         </div>
@@ -191,32 +213,32 @@
             }
        
         <div class="col-md-12 col-xs-12" style="padding:0;padding-bottom: 20px;box-shadow: 0px 1px 6px 0px #00000040;">
-                  <div class="finmenuheader menu-title" style="color: black;"><p class="media-heading" style="border-radius:initial !important;text-transform:uppercase">@field</p></div>
+                  <div class="finmenuheader menu-title"><p class="media-heading" style="border-radius:initial !important;text-transform:uppercase">@field</p></div>
             
 
                 <!-- linked single material-->
-                @if (selectedpost != null)
+                @if (Model.selectedpost != null)
             {
-                if (selectedpost.materials.Count > 0)
+                if (Model.selectedpost.materials.Count > 0)
                 {
             <div class="col-md-12">
                 <div class="alert alert-success hidden-xs" style="margin-top: 12px;" role="alert"><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</div>
                 <div class="alert alert-warning hidden-xs" role="alert">Click here to copy the attribution link for this model and paste it on your website.</div>
                 <span href="#" class="thumbnail hoverclickzor">
                     <div class="innerpictext">
-                        @selectedpost.materials.First().description<br /> By Christopher Jubell 2017 under <a class="alink" href="http://creativecommons.org/licenses/by/4.0/">(CC BY 4.0)</a>  <br /><br />
+                        @Model.selectedpost.materials.First().description<br /> By Christopher Jubell 2018 under <a class="alink" href="http://creativecommons.org/licenses/by/4.0/">(CC BY 4.0)</a>  <br /><br />
 
                         @if (Model.selectedmaterial.type == 3) // the material type is a blender file
                                 {
-                                <a href="@Url.Action("GetBlenderFile","Home",new { FileUrl = selectedpost.materials.First().BlenderFile })"><button type="button" class="btn btn-success">Download 3D Model</button></a>
+                                <a href="@Url.Action("GetBlenderFile","Home",new { FileUrl = Model.selectedpost.materials.First().BlenderFile })"><button type="button" class="btn btn-success">Download 3D Model</button></a>
                                 }
                                 else
                                 {
-                                <a href="@selectedpost.materials.First().imageurl" download="material"><button type="button" class="btn btn-success">Download</button></a>
+                                <a href="@Model.selectedpost.materials.First().imageurl" download="material"><button type="button" class="btn btn-success">Download</button></a>
                                 }
 
                     </div>
-                    <img src="@selectedpost.materials.First().imageurl" alt="...">
+                    <img src="@Model.selectedpost.materials.First().imageurl" alt="...">
                 </span>
             </div>
                 }
@@ -233,12 +255,12 @@
 
                         <!-- IF post has materials, show all conencted, otherwise, jsut show all materials here-->
 
-                        @if (selectedpost != null)
+                        @if (Model.selectedpost != null)
                         {
-                            if (selectedpost.materials.Count > 0)
+                            if (Model.selectedpost.materials.Count > 0)
                             {
                                 <div class="col-md-12 alert alert-success">Limited to 4 results, click <a href="@Url.Action("Materials","Home")">here</a> to see all free materials</div>
-                                foreach (var materialCON in selectedpost.materials)
+                                foreach (var materialCON in Model.selectedpost.materials)
                                 {
                                     <div class="col-xs-12 col-sm-3 col-md-3">
 
@@ -289,9 +311,22 @@
         </div>
     </div>
     @{
-        Model.posts.Remove(selectedpost);
+        Model.posts.Remove(Model.selectedpost);
     }
     <div style="height:20px;float: left;width:100%" class="visible-xs"></div>
-    <div class="col-xs-12 col-md-4 col-md-pull-8 menu-expander">@Html.Partial("_menu", Model.posts)</div>
+    <div class="col-xs-12 col-md-4 col-md-pull-8 menu-expander">
+
+        <ul class="media-list">
+            <li class="media">
+                <div class="finmenuheader">
+                    <p class="menu-title media-heading" style="border-radius:initial !important">RELATED PROJECT POSTS</p>
+                </div>
+
+                <div class="small-space"></div>
+                @Html.Partial("_menu", Model.posts)
+            </li>
+        </ul>
+
+    </div>
 
 </div>

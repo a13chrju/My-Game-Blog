@@ -73,22 +73,48 @@
         <div class="fixed-menu">
             <nav aria-label="Page navigation">
                 <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
+                    @if (Model.pagenation.CurrentPage != 1)
+                    {
+                        <li>
+                            <a href="@Url.Action("page", "Home", new { id = (Model.pagenation.CurrentPage - 1) })" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="#" aria-label="Previous" style="background-color:lightgray">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    }
+  
                     @for (var i = Model.pagenation.StartPage; i < Model.pagenation.EndPage; i++)
                     {
                         <li class="@(i == Model.pagenation.CurrentPage ? "active" : "")">
                             <a href="@Url.Action("page", "Home", new { id = i })">@i</a>
                         </li>
                     }
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
+
+                    @if (Model.pagenation.CurrentPage != Model.pagenation.EndPage)
+                    {
+                        <li>
+                            <a href="@Url.Action("page", "Home", new { id = (Model.pagenation.CurrentPage + 1) })" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="#" aria-label="Next" style="background-color:lightgray">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    }
+
+
                 </ul>
             </nav>
 
@@ -104,16 +130,6 @@
             <span id="@post.index"></span>  <!-- anchor link desitination-->
             <div class="datum">
                 <div class="category hidden-xs">
-
-                    @if (post.category == 1)
-                    {
-                        <span class="hdtwo">MY MOBA</span>
-                    }
-                    else
-                    {
-                        <h3 class="hdtwo">MY FPS GAME</h3>
-                    }
-                
                   
                     <a href="#" class="comment">
                         <!-- <span class="glyphicon glyphicon-comment comment"></span>-->
@@ -159,6 +175,7 @@
 
                             <div class="caption" style="margin:10px">
                                 <h3 style="margin:0">@post.titel</h3>
+                                <hr />
                                 <p style="margin:0">@post.text</p>
                             </div>
                         </div>
@@ -184,7 +201,7 @@
                                                             <span class="glyphicon glyphicon-download"></span>
                                                         </div>
                                                         <a class="thumbnail" href="@Url.Action("materials", "Home", new { id = material.index })">
-                                                            <img class="material-size" src="@material.imageurl" />
+                                                            <img class="material-size" src="http://christopherj-002-site1.gtempurl.com/@material.imageurl" />
                                                         </a>
                                                     </div>
                                                 </div>
