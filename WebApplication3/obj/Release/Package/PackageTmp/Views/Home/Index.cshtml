@@ -140,7 +140,7 @@
                 <div class="row post-wrapp">
                     <!-- category ICON -->
                     @{ 
-                        var width = "col-md-7";
+                        var width = "col-md-9";
                         if (post.materials.Count() <= 0)
                         {
                             width = "col-md-12";
@@ -159,7 +159,7 @@
                                         <iframe src="@post.video_url" frameborder="0" autoplay="0" allowfullscreen class="video"></iframe>
                                     </div>
                                 }
-                                else
+                                @*  else
                                 {
                                     if (post.materials.Count > 0) //this blogg post has a material
                                     {
@@ -168,7 +168,7 @@
                                         </div>
                                     }
 
-                                }
+                                }*@
 
                                 @*<span class="play">GIF</span>*@
                             </div>
@@ -182,7 +182,7 @@
                     </div>
                     @if (post.materials.Count() > 0)
                     {
-                    <div class="col-md-5 info">
+                    <div class="col-md-3 info">
                         @if (post.materials.Where(x => x.type == 1).Count() > 0)
                         {
 
@@ -194,7 +194,7 @@
                                     {
                                         if (material.type == 1)
                                         {
-                                            <div class="col-md-6 col-sm-6 padd0">
+                                            <div class="col-md-12 col-sm-12 padd0">
                                                 <div class="material">
                                                     <div class="material-hold">
                                                         <div class="hoveritem">

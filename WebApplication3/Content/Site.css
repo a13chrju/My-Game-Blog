@@ -603,7 +603,7 @@ body {
     text-transform: uppercase;
     background-color: #00000082;
 }
-.navbar-nav > li {font-weight:600 !important; text-transform:uppercase;
+.navbar-nav > li {font-weight:600 !important;
 }
 
 .imgboxcool:hover {
@@ -818,3 +818,7 @@ ol {
         border-radius: 2em;
         transition: all .3s ease-out;
     }
+
+.sidetoolbar h3{
+    padding:20px;
+}
