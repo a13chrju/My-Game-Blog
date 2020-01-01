@@ -1,0 +1,92 @@
+﻿@model List<WebApplication3.Models.blogg>
+@{
+    ViewBag.Title = "betaTestingScreen";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<header class="main-header" id="header">
+    <div class="bg-color">
+        <!--nav-->
+        @* <nav class="navbar navbar-dark  indigo darken-2" id="menuHamburger">
+
+                <!-- Navbar brand -->
+                <a href="index.html" class="navbar-brand" style="margin-left:20px">Chris J</a>
+                <!-- Collapse button -->
+                <button class="navbar-toggler third-button" type="button" (click)="clickEvent()" data-toggle="collapse" data-target="#navbarSupportedContent22"
+                        aria-controls="navbarSupportedContent22" aria-expanded="false" aria-label="Toggle navigation">
+                    <div class="animated-icon3 open"><span></span><span></span><span></span></div>
+                </button>
+
+                <!-- Collapsible content -->
+                <div class="collapse navbar-collapse show" id="navbarSupportedContent22">
+
+                    <!-- Links -->
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link" >Portfolio</a></li>
+                        <li class="nav-item"><a class="nav-link" >Erfarenheter</a></li>
+                        <li class="nav-item"><a class="nav-link" >Kontakt</a></li>
+                    </ul>
+                    <!-- Links -->
+
+                </div>
+                <!-- Collapsible content -->
+
+            </nav>*@
+
+        <div class="container text-center">
+            <div class="wrapper wow fadeInUp delay-05s paddingtop50">
+
+                <h3 class="chris-title">KING OF THE ISLES</h3>
+                <h4 class="sub-title">Want to give feedback? Download free now</h4>
+
+                <a download href="~/Content/KingOfIsles.zip" class="btn btn-submit hidden-xs windowsbtn">Download Test Version Alpha 1.0</a>
+                <a download href="~/Content/KingOfIsles.zip" class="btn btn-submit visible-xs">Download Alpha 1.0</a>
+                <div class="spacer"></div>
+                <p>24.1 MB <img src="~/Content/widnowsICon.png" /></p>
+            </div>
+        </div>
+    </div>
+</header>
+
+@* section cards *@
+
+<section class="section-padding wow fadeInUp delay-05s" id="AboutMe">
+    <div class="container">
+        <div class="row white">
+            <div class="col-md-12 col-sm-12">
+                <div class="section-title">
+                    <h2 class="sub-headline">LATEST POSTS FROM MY DEVELOPER BLOG</h2>
+                    <div class="row">
+
+                        <div class="col-sm-12 col-md-12">
+
+
+                            <div class="row" *ngIf="posts.length > 0">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let post of posts">
+                                        <a href="@Url.Action("FreeContent", "Home", new { postid = item.index})">
+                                            <div class="card">
+                                                <img src="@item.thumbnail" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h2 class="card-title">@item.titel</h2>
+                                                    <p class="card-text">@item.text</p> @*hämtar short_desc from databasen och lägger din i text*@
+                                                    <div class="small-spacer"></div>
+                                                    <div class="btn btn-primary stick-btn-bottom">Open up</div>
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                    </div>
+                                }
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><div class="powr-chat" id="ae83f33f_1577804045"></div>

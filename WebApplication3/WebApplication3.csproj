@@ -167,12 +167,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bakgameround.jpg" />
+    <Content Include="Content\bakgameround2.jpg" />
+    <Content Include="Content\bakgameround4.jpg" />
     <Content Include="Content\banner1.jpg" />
     <Content Include="Content\bannerFPS.jpg" />
+    <Content Include="Content\betatesting.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fps1y.PNG" />
+    <Content Include="Content\mGAMe.jpg" />
     <Content Include="Content\unityencoded.mp4" />
+    <Content Include="Content\widnowsICon.png" />
+    <Content Include="Content\winterfinal.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -183,8 +190,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\styles.less" />
+    <Content Include="Content\AlphaTest.zip" />
+    <Content Include="Content\styleshere.less" />
+    <Content Include="Content\KingOfIsles.zip" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings1.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -217,6 +229,9 @@
     <Content Include="Views\Home\_menu2.cshtml" />
     <Content Include="Views\Home\Materials.cshtml" />
     <Content Include="Views\Home\Firstpage.cshtml" />
+    <Content Include="Views\Home\_DownloadMYGame.cshtml" />
+    <Content Include="Views\Home\betaTestingScreen.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

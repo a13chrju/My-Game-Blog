@@ -60,7 +60,6 @@ namespace WebApplication3.Controllers
                 post.titel = r2["titel"].ToString();
                 post.text = r2["text"].ToString();
                 post.thumbnail = r2["thumbnail"].ToString();
-                post.episode = Convert.ToInt32(r2["episode"]);
                 post.category = Convert.ToInt32(r2["category"]); ;
                 post.index = Convert.ToInt32(r2["id"]);
                 post.datum = r2["datum"].ToString();
@@ -116,7 +115,7 @@ namespace WebApplication3.Controllers
 
             }
 
-            Pager pagenation2 = new Pager(sizepages, 1, 2);
+            Pager pagenation2 = new Pager(sizepages, 1, 4);
             blogg.pagenation = pagenation2;
             con4.Close();
 
@@ -176,6 +175,35 @@ namespace WebApplication3.Controllers
                 model.selectedmaterial = selectedmaterial;
                 con5.Close();
             }
+
+            return View(model);
+        }
+
+        public ActionResult betaTestingScreen()
+        {
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["test"].ToString();
+            bloggs blogg = new bloggs();
+
+            con.Open();
+            MySqlCommand fetchdata2 = new MySqlCommand("SELECT * FROM post order by id desc limit 0,6", con);
+            MySqlDataReader r2 = fetchdata2.ExecuteReader();
+
+            List<blogg> model = new List<blogg>();
+            while (r2.Read())
+            {
+                blogg post = new blogg();
+                post.titel = r2["titel"].ToString();
+                post.text = r2["short_desc"].ToString();
+                post.thumbnail = r2["thumbnail"].ToString();
+                post.index = Convert.ToInt32(r2["id"]);
+                post.datum = r2["datum"].ToString();
+                post.video_url = r2["video_url"].ToString();
+
+                model.Add(post);
+               
+            }
+            con.Close();
 
             return View(model);
         }
@@ -508,7 +536,7 @@ namespace WebApplication3.Controllers
             
             }
 
-            Pager pagenation2 = new Pager(sizepages,id,2);
+            Pager pagenation2 = new Pager(sizepages,id,4);
             blogg.pagenation = pagenation2;
             con4.Close();
 

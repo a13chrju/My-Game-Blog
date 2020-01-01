@@ -73,7 +73,7 @@
                     }
 
                 </div>
-                <img src="http://christopherj-002-site1.gtempurl.com/@Model.selectedmaterial.imageurl" alt="...">
+                <img src="@Model.selectedmaterial.imageurl" alt="...">
             </span>
         </div>
 
@@ -104,7 +104,7 @@
                 <div class="col-xs-12 col-sm-4 col-md-3" style="padding: 0;">
                     <div class="mat_box">@material.description</div>
                     <a href="@Url.Action("materials", "Home", new { id = material.index })">
-                        <div class="imgboxcool" style="height:300px;wdith:100%;background-position: center;background-image:url('http://christopherj-002-site1.gtempurl.com/@material.imageurl');background-size:cover;"></div>
+                        <div class="imgboxcool" style="height:300px;wdith:100%;background-position: center;background-image:url('@material.imageurl');background-size:cover;"></div>
                     </a>
 
                 </div>

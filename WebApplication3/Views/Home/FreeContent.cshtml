@@ -123,9 +123,6 @@
                             <span class="glyphicon glyphicon-calendar" style="float: left;"></span>
                             <span style="margin-left: 10px;">@Model.selectedpost.datum</span>
                         </div>
-                        <div class="datebar">
-                            Episode: @Model.selectedpost.episode
-                        </div>
                     </div>
 
                 </div>
@@ -135,7 +132,7 @@
     {
         <div class="bannercategory">
             <div class="container body-content" style="background-image:url('../../Content/mygame.jpg');background-position: center;
-    background-size: cover;height:200px;border: 0;">
+    background-size: cover;border: 0;">
                 <div class="row">
                     <div class="col-md-6 col-md-push-6">
                         <div class="mobilehead" onclick="fetchepisodes(@Model.selectedpost.category)">
@@ -146,9 +143,6 @@
                         <div class="datebar">
                             <span class="glyphicon glyphicon-calendar" style="float: left;"></span>
                             <span style="margin-left: 10px;">@Model.selectedpost.datum</span>
-                        </div>
-                        <div class="datebar">
-                            Episode: @Model.selectedpost.episode
                         </div>
                     </div>
 
@@ -222,7 +216,7 @@
             { 
                 <div class="col-md-12 col-xs-12" style="padding:0;margin-bottom:20px;    padding-bottom: 20px;box-shadow: 0px 1px 6px 0px #00000040;">
                     <div class="finmenuheader menu-title">
-                        <p class="media-heading" style="border-radius:initial !important">Developer log</p>
+                        Developer log
                     </div>
                     <div class="col-md-12 col-xs-12 bread">
                         <div class='caption'>
@@ -237,7 +231,7 @@
             }
        
         <div class="col-md-12 col-xs-12" style="padding:0;padding-bottom: 20px;box-shadow: 0px 1px 6px 0px #00000040;">
-                  <div class="finmenuheader menu-title"><p class="media-heading" style="border-radius:initial !important;text-transform:uppercase">@field</p></div>
+                  <div class="finmenuheader menu-title">@field</div>
             
 
                 <!-- linked single material-->
